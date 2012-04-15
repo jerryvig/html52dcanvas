@@ -1,0 +1,75 @@
+<html>
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+  
+</head>
+<body>
+  <canvas id="demo">No HTML5 Canvas Support!</canvas>
+  <script type="text/javascript">
+    var canvas = document.getElementById('demo');
+    var w = window.innerWidth;
+    var h = window.innerHeight;
+    canvas.setAttribute('width',' '+w);
+    canvas.setAttribute('height',' '+h);
+    function checkSupport() {
+       return !!(document.createElement('canvas').getContext('2d'));
+    }
+
+    var context = canvas.getContext('2d');
+    context.lineWidth=3;
+    context.beginPath();
+    context.arc(100, 100, 70, 0, Math.PI*2, true);
+    context.closePath();
+    context.stroke();
+    context.beginPath();
+    context.arc(75, 75, 10, 0, Math.PI*2, true);
+    context.closePath();
+    context.fill();
+    context.beginPath();
+    context.arc(125, 75, 10, 0, Math.PI*2, true);
+    context.closePath();
+    context.fill();
+    context.beginPath();
+    context.arc(100, 100, 50, 0, Math.PI, false);
+    context.stroke();
+    context.beginPath();
+    context.moveTo(100,120);
+    context.lineTo(85,100);
+    context.lineTo(115,100);
+    context.closePath();
+    context.fill();
+
+    context.fillStyle = "rgba(60,60,60,0.99)";
+    context.fillRect(25,25,50,50);
+    context.lineWidth=5;
+    context.beginPath();
+    context.arc(50,50,45,0,Math.PI*2,true);
+    context.closePath();
+    context.stroke();
+
+    context.translate(50,50);
+    context.rotate(Math.PI/4);
+    context.fillRect(0,0,50,50);
+
+    var imgscale = 3/4;
+    var img = new Image();
+    img.src = "image.jpg";
+    img.onload = function() {
+      var imgw = imgscale*img.width;
+      var imgh = imgscale*img.height;
+      context.drawImage(img,10,10,imgw,imgh);
+      context.drawImage(img,10,20+imgh,imgw,imgh);
+      var imgdata = context.getImageData(10, 20+imgh, imgw, imgh);
+      var pixels = imgdata.data;
+      for ( var i=0; i<pixels.length; i=i+4 ) {
+         var grayscale = (pixels[i]+pixels[i+1]+pixels[i+2])/3;
+         pixels[i] = grayscale;
+         pixels[i+1] = grayscale;
+         pixels[i+2] = grayscale;
+      }
+      context.putImageData(imgdata,10,20+imgh);
+    }
+
+  </script>
+</body>
+</html>

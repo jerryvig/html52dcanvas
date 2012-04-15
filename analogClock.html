@@ -1,0 +1,112 @@
+<html>
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+  
+</head>
+<body>
+  <canvas id="demo">No HTML5 Canvas Support!</canvas>
+  <script type="text/javascript">
+    var canvas = document.getElementById('demo');
+    var w = window.innerWidth;
+    var h = window.innerHeight;
+    canvas.setAttribute('width',' '+w);
+    canvas.setAttribute('height',' '+h);
+    function checkSupport() {
+       return !!(document.createElement('canvas').getContext('2d'));
+    }
+
+    var context = canvas.getContext('2d');
+
+    var h = 0;
+    var min = 0;
+    var sec = 0;
+    var msec = 0;
+    var wth = document.body.clientWidth;
+    var hth = document.body.clientHeight;
+    window.setInterval("updateClock()",100);
+   
+    function updateClock() {
+      getTime();
+      drawClock();  
+    }
+
+    function getTime() {
+      var date = new Date();
+      h = date.getHours();
+      min = date.getMinutes();
+      sec = date.getSeconds();
+      msec = date.getMilliseconds(); 
+    }
+
+    function drawClock() {
+      context.save();
+      context.translate(wth/2,hth/2);
+      context.clearRect(-hth/2,-hth/2,hth,hth);
+      context.restore();
+      drawClockCase();
+      drawClockPointer();
+    }
+
+    function drawClockCase() {
+      context.save();
+      context.fillStyle = "rgb(183, 203, 227)";
+      context.translate(wth/2,hth/2);
+
+      for ( var m=0; m<12; m++ ) {
+         context.rotate(Math.PI*2/(12));
+         context.fillRect(-5,-(hth/2-20),10,50);
+      }
+
+      for ( var n=60;n<60;n++ ) {
+         context.rotate( Math.PI*2/(60) );
+         context.fillRect(-2, -(hth/2-20),4,20);
+      } 
+      context.restore();
+      context.save();
+      context.lineWidth = 20;
+      context.strokeStyle = "rgba(111,164,122,0.6)";
+      context.beginPath();
+      context.arc(wth/2,hth/2,hth/2-20,0,Math.PI*2,true);
+      context.closePath();
+      context.stroke();
+      context.restore();
+    }
+
+    function drawClockPointer() {
+       //Hours
+       context.save();
+       context.fillStyle = "rgba(93, 94, 96, 0.99)";
+       context.translate(wth/2,hth/2);
+       context.rotate(Math.PI*2/(43200/(h*60*60+min*60+sec)));
+       context.fillRect(-12,-hth/4,24,hth/4);
+       context.restore();
+
+       //Minutes
+       context.save();
+       context.fillStyle = "rgba(93,94,96,0.99)";
+       context.translate(wth/2,hth/2);
+       context.rotate(Math.PI*2/(3600000/(min*60000+sec*1000)));
+       context.fillRect(-10,-3*hth/8,20,3*hth/8);
+       context.restore();
+
+       //Seconds
+       context.save();
+       context.fillStyle = "rgba(93,94,96,0.99)";
+       context.translate(wth/2,hth/2);
+       context.rotate(Math.PI*2/(60/sec));
+       context.fillRect(-8,-34*hth/80,16,34*hth/80+45);
+       context.restore();
+
+       //Midpoint
+       context.save();
+       context.fillStyle = "rgba(50,50,50,0.99)";
+       context.beginPath();
+       context.arc(wth/2,hth/2,20,0,Math.PI*2,true);
+       context.closePath();
+       context.fill();
+       context.restore();
+    }
+
+  </script>
+</body>
+</html>
