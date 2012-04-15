@@ -1,0 +1,26 @@
+<html>
+<head></head>
+<body>
+<canvas id="myCanvas" width="200" height="100">
+ <script type="text/javascript">
+   var c = document.getElementById("myCanvas");
+   var ctx = c.getContext("2d");
+   /*ctx.fillStyle = "#ff0000";
+   ctx.fillRect(0,0,150,75);
+
+   var grd = ctx.createLinearGradient(0,0,175,50);
+   grd.addColorStop(0,"#FF0000");
+   grd.addColorStop(1,"#00FF00");
+   ctx.fillStyle = grd;
+   ctx.fillRect(0,0,175,50);*/
+
+   var img=new Image();
+   img.src="tstImage.jpg";
+   img.onload = function(){
+     ctx.drawImage(img,0,0);
+   };
+
+ </script>
+</canvas>
+</body>
+</html>
