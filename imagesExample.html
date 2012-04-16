@@ -1,0 +1,25 @@
+<html>
+<head>
+<script type="text/javascript">
+function drawCanvas() {
+ var canvas = document.getElementById('tutorial');
+ if ( canvas.getContext ) {
+   var ctx = canvas.getContext('2d');
+   var img = new Image();
+   
+   ctx.drawImage(document.getElementById('source'),33,71,104,124,21,20,87,104);
+   ctx.drawImage(document.getElementById('frame'),0,0);
+
+   img.onload = function() { 
+   };
+   img.src = 'rhino.jpg';
+ }
+}
+</script>
+</head>
+<body onload="drawCanvas();">
+<canvas id="tutorial" width="300" height="300">
+ <img src="http://www.oddee.com/_media/imgs/articles/a351_dali.jpg"/>
+</canvas>
+</body>
+</html>

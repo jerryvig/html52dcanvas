@@ -1,0 +1,28 @@
+<html>
+<head>
+<script type="text/javascript">
+function drawCanvas() {
+ var canvas = document.getElementById('tutorial');
+ if ( canvas.getContext ) {
+   var ctx = canvas.getContext('2d');
+   var img = new Image();
+   img.onload = function() { 
+     for ( var i=0; i<4; i++ ) {
+      for ( var j=0; j<3; j++ ) {
+        ctx.drawImage(img,j*50,i*38,50,38); 
+      }
+     }
+   };
+   img.src = 'backdrop.png'; 
+   
+
+ }
+}
+</script>
+</head>
+<body onload="drawCanvas();">
+<canvas id="tutorial" width="300" height="300">
+ <img src="http://www.oddee.com/_media/imgs/articles/a351_dali.jpg"/>
+</canvas>
+</body>
+</html>

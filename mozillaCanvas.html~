@@ -1,0 +1,8 @@
+<html>
+<head></head>
+<body>
+<canvas id="clock" width="150" height="150">
+ <img src="http://www.oddee.com/_media/imgs/articles/a351_dali.jpg"/>
+</canvas>
+</body>
+</html>
